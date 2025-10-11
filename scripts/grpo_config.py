@@ -9,7 +9,7 @@ from model_utility import (
 )
 from copy import deepcopy
 from lrs_lookup import get_grpo_lr, get_grpo_python_lr
-allow_find_lk_lr = False
+allow_find_lk_lr = True
 
 GRPO_CONFIG = {
     "0_1_b": {
@@ -331,6 +331,12 @@ def get_training_json(train_info: dict) -> dict:
 
     if not config.get("use_vllm", True):
         run_config["use_vllm"] = False
+
+    has_python_execution = contain_python_execution(train_info["dataset_type"])
+    if not has_python_execution:
+        allow_find_lk_lr = True
+    else:
+        allow_find_lk_lr = False
 
     if train_info["find_lk_lr"] and allow_find_lk_lr:
         # get lr from lrs_lookup.py

@@ -16,8 +16,26 @@ def get_dpo_lr(model: str):
     hashed_model = hash_model(model)
     print(f"model_name: {model}", flush=True)
 
-    with open(os.path.join(current_dir, "lrs/dpo.json"), "r") as f:
-        dpo_lrs = json.load(f)
+    config_file = f"{os.path.join(current_dir, 'lrs')}/dpo_{model.split('/', 1)[1]}.json"
+    print(f"config_dpo1: {config_file}")
+    if os.path.exists(config_file):
+        print(f"Config: {config_file}")
+        with open(config_file, "r") as f:
+            dpo_lrs = json.load(f)
+    else:
+        config_file = f"{os.path.join(current_dir, 'lrs')}/dpo_{model.split('/', 1)[0]}.json"
+        print(f"config_dpo0: {config_file}")
+        if os.path.exists(config_file):
+            print(f"Config: {config_file}")
+            with open(config_file, "r") as f:
+                dpo_lrs = json.load(f)
+        else:
+            config_file = f"{os.path.join(current_dir, 'lrs')}/dpo.json"
+            print(f"config_dpo_default: {config_file}")
+            if os.path.exists(config_file):
+                print(f"Config: {config_file}")
+                with open(config_file, "r") as f:
+                    dpo_lrs = json.load(f)
 
     for lr in dpo_lrs:
         if lr["h"] == hashed_model:
@@ -30,8 +48,26 @@ def get_grpo_lr(model: str):
     hashed_model = hash_model(model)
     print(f"model_name: {model}", flush=True)
 
-    with open(os.path.join(current_dir, "lrs/grpo.json"), "r") as f:
-        grpo_lrs = json.load(f)
+    config_file = f"{os.path.join(current_dir, 'lrs')}/grpo_{model.split('/', 1)[1]}.json"
+    print(f"config_grpo1: {config_file}")
+    if os.path.exists(config_file):
+        print(f"Config: {config_file}")
+        with open(config_file, "r") as f:
+            grpo_lrs = json.load(f)
+    else:
+        config_file = f"{os.path.join(current_dir, 'lrs')}/grpo_{model.split('/', 1)[0]}.json"
+        print(f"config_grpo0: {config_file}")
+        if os.path.exists(config_file):
+            print(f"Config: {config_file}")
+            with open(config_file, "r") as f:
+                grpo_lrs = json.load(f)
+        else:
+            config_file = f"{os.path.join(current_dir, 'lrs')}/grpo.json"
+            print(f"config_grpo_default: {config_file}")
+            if os.path.exists(config_file):
+                print(f"Config: {config_file}")
+                with open(config_file, "r") as f:
+                    grpo_lrs = json.load(f)
 
     for lr in grpo_lrs:
         if lr["h"] == hashed_model:
@@ -43,8 +79,26 @@ def get_instruct_lr(model: str):
     hashed_model = hash_model(model)
     print(f"model_name: {model}", flush=True)
 
-    with open(os.path.join(current_dir, "lrs/instruct.json"), "r") as f:
-        instruct_lrs = json.load(f)
+    config_file = f"{os.path.join(current_dir, 'lrs')}/instruct_{model.split('/', 1)[1]}.json"
+    print(f"config_instruct1: {config_file}")
+    if os.path.exists(config_file):
+        print(f"Config: {config_file}")
+        with open(config_file, "r") as f:
+            instruct_lrs = json.load(f)
+    else:
+        config_file = f"{os.path.join(current_dir, 'lrs')}/instruct_{model.split('/', 1)[0]}.json"
+        print(f"config_instruct0: {config_file}")
+        if os.path.exists(config_file):
+            print(f"Config: {config_file}")
+            with open(config_file, "r") as f:
+                instruct_lrs = json.load(f)
+        else:
+            config_file = f"{os.path.join(current_dir, 'lrs')}/instruct.json"
+            print(f"config_instruct_default: {config_file}")
+            if os.path.exists(config_file):
+                print(f"Config: {config_file}")
+                with open(config_file, "r") as f:
+                    instruct_lrs = json.load(f)
 
     for lr in instruct_lrs:
         if lr["h"] == hashed_model:
@@ -56,8 +110,26 @@ def get_grpo_python_lr(model: str):
     hashed_model = hash_model(model)
     print(f"model_name: {model}", flush=True)
 
-    with open(os.path.join(current_dir, "lrs/grpo_python.json"), "r") as f:
-        grpo_python_lrs = json.load(f)
+    config_file = f"{os.path.join(current_dir, 'lrs')}/grpo_python_{model.split('/', 1)[1]}.json"
+    print(f"config_grpo_python1: {config_file}")
+    if os.path.exists(config_file):
+        print(f"Config: {config_file}")
+        with open(config_file, "r") as f:
+            grpo_python_lrs = json.load(f)
+    else:
+        config_file = f"{os.path.join(current_dir, 'lrs')}/grpo_python_{model.split('/', 1)[0]}.json"
+        print(f"config_grpo_python0: {config_file}")
+        if os.path.exists(config_file):
+            print(f"Config: {config_file}")
+            with open(config_file, "r") as f:
+                grpo_python_lrs = json.load(f)
+        else:
+            config_file = f"{os.path.join(current_dir, 'lrs')}/grpo_python.json"
+            print(f"config_grpo_python_default: {config_file}")
+            if os.path.exists(config_file):
+                print(f"Config: {config_file}")
+                with open(config_file, "r") as f:
+                    grpo_python_lrs = json.load(f)
 
     for lr in grpo_python_lrs:
         if lr["h"] == hashed_model:
