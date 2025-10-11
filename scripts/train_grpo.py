@@ -391,7 +391,7 @@ def main():
         device_map=device_map,
         quantization_config=quantization_config,
     )
-    training_args.beta = BETA_GRPO
+
     log_info(f"final training_args: {training_args}")
 
     if training_args.use_liger:

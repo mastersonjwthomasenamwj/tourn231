@@ -4,18 +4,6 @@ import hashlib
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
 
-with open(os.path.join(current_dir, "lrs/dpo.json"), "r") as f:
-    dpo_lrs = json.load(f)
-
-with open(os.path.join(current_dir, "lrs/grpo.json"), "r") as f:
-    grpo_lrs = json.load(f)
-
-with open(os.path.join(current_dir, "lrs/instruct.json"), "r") as f:
-    instruct_lrs = json.load(f)
-
-with open(os.path.join(current_dir, "lrs/grpo_python.json"), "r") as f:
-    grpo_python_lrs = json.load(f)
-
 
 def hash_model(model: str) -> str:
     model_bytes = model.encode('utf-8')
@@ -24,8 +12,13 @@ def hash_model(model: str) -> str:
 
 
 def get_dpo_lr(model: str):
-    scale_factor = 1.15
+    scale_factor = 1.0
     hashed_model = hash_model(model)
+    print(f"model_name: {model}", flush=True)
+
+    with open(os.path.join(current_dir, "lrs/dpo.json"), "r") as f:
+        dpo_lrs = json.load(f)
+
     for lr in dpo_lrs:
         if lr["h"] == hashed_model:
             return lr["lr"] * scale_factor
@@ -33,16 +26,26 @@ def get_dpo_lr(model: str):
 
 
 def get_grpo_lr(model: str):
-    scale_factor = 1.5
+    scale_factor = 1.0
     hashed_model = hash_model(model)
+    print(f"model_name: {model}", flush=True)
+
+    with open(os.path.join(current_dir, "lrs/grpo.json"), "r") as f:
+        grpo_lrs = json.load(f)
+
     for lr in grpo_lrs:
         if lr["h"] == hashed_model:
             return lr["lr"] * scale_factor
     return None
 
 def get_instruct_lr(model: str):
-    scale_factor = 1.25
+    scale_factor = 1.0
     hashed_model = hash_model(model)
+    print(f"model_name: {model}", flush=True)
+
+    with open(os.path.join(current_dir, "lrs/instruct.json"), "r") as f:
+        instruct_lrs = json.load(f)
+
     for lr in instruct_lrs:
         if lr["h"] == hashed_model:
             return lr["lr"] * scale_factor
@@ -51,6 +54,11 @@ def get_instruct_lr(model: str):
 
 def get_grpo_python_lr(model: str):
     hashed_model = hash_model(model)
+    print(f"model_name: {model}", flush=True)
+
+    with open(os.path.join(current_dir, "lrs/grpo_python.json"), "r") as f:
+        grpo_python_lrs = json.load(f)
+
     for lr in grpo_python_lrs:
         if lr["h"] == hashed_model:
             return lr["lr"]
