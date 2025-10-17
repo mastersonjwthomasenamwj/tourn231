@@ -167,6 +167,7 @@ def get_grpo_python_lr(model: str):
 
     try:
         with open(ratio_file, "r") as f:
+            print(f"Ratio: {ratio_file}")
             ratio_lrs = json.load(f)
             scale_factor = ratio_lrs["ratio"]
     except:
@@ -174,5 +175,9 @@ def get_grpo_python_lr(model: str):
 
     for lr in grpo_python_lrs:
         if lr["h"] == hashed_model:
-            return lr["lr"] * scale_factor
+            lr_return = lr["lr"] * scale_factor
+            print(f"scale: {scale_factor}")
+            print(f"lr: {lr_return}")
+            return lr_return
+
     return None
